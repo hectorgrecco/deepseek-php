@@ -29,7 +29,6 @@ class CompletionsRequest
         float $presencePenalty,
         array $responseFormat,
         ?array $stop,
-        bool $stream,
         ?array $streamOptions,
         float $temperature,
         float $topP,
@@ -44,12 +43,32 @@ class CompletionsRequest
         $this->presencePenalty = $presencePenalty;
         $this->responseFormat = $responseFormat;
         $this->stop = $stop;
-        $this->stream = $stream;
+        $this->stream = false;
         $this->streamOptions = $streamOptions;
         $this->temperature = $temperature;
         $this->topP = $topP;
         $this->tools = $tools;
         $this->toolChoice = $toolChoice;
         $this->logprobs = $logprobs;
+    }
+
+    public function toJson()
+    {
+        return json_encode([
+            'messages' => $this->messages,
+            'model' => $this->model->value,
+            'frequency_penalty' => $this->frequencyPenalty,
+            'max_tokens' => $this->maxTokens,
+            'presence_penalty' => $this->presencePenalty,
+            'response_format' => $this->responseFormat,
+            'stop' => $this->stop,
+            'stream' => $this->stream,
+            'stream_options' => $this->streamOptions,
+            'temperature' => $this->temperature,
+            'top_p' => $this->topP,
+            'tools' => $this->tools,
+            'tool_choice' => $this->toolChoice,
+            'logprobs' => $this->logprobs,
+        ]);
     }
 }

@@ -8,7 +8,7 @@ final class DeepSeek
 
     public function __construct(string $apiKey)
     {
-        $this->client = new Client([
+        $this->http = new Client([
             'base_uri' => 'https://api.deepseek.com/',
             'headers' => [
                 'Authorization' => 'Bearer ' . $apiKey,
@@ -16,5 +16,7 @@ final class DeepSeek
         ]);
     }
 
-
+    public function client(): DeepSeekClient {
+        return new DeepSeekClient($this->http);
+    }
 }

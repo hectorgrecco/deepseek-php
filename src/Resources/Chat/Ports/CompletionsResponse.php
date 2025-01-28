@@ -28,4 +28,16 @@ class CompletionsResponse
         $this->object = $object;
         $this->usage = $usage;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id,
+            'choices' => $this->choices,
+            'created' => $this->created,
+            'model' => $this->model,
+            'object' => $this->object,
+            'usage' => $this->usage,
+        ];
+    }
 }

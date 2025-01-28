@@ -1,10 +1,18 @@
 <?php
 
+use GuzzleHttp\Client;
+use Resources\Chat\Chat;
 use Resources\Chat\Ports\CompletionsRequest;
 
-class Client
+class DeepSeekClient
 {
-    public function completions(CompletionsRequest $params) {
+    private readonly Client $client;
 
+    public function __construct(Client $client) {
+        $this->client = $client;
+    }
+
+    public function chat(CompletionsRequest $params) {
+        return new Chat($this->client);
     }
 }
